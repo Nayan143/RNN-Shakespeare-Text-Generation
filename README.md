@@ -11,7 +11,7 @@
 
 - Model: "sequential_2"
 _________________________________________________________________
-- Layer (type)                 Output Shape              Param #   
+- Layer (type)                 Output Shape              Param  
 
 - embedding_2 (Embedding)      (1, None, 256)            16640     
 - lstm_2 (LSTM)                (1, None, 1024)           5246976   
