@@ -6,25 +6,21 @@ from text_generation import generate_text
 
 model = tf.keras.models.load_model('rnn_text_generation.h5')
 
-print(model.summary())
+app = Flask(__name__)
 
-#print(generate_text(model, start_string="ROMEO: ", temperature=0.01))
+@app.route('/')
+def homePage():
+    return render_template('index.html')
 
-# app = Flask(__name__)
-#
-# @app.route('/')
-# def homePage():
-#     return render_template('index.html')
-#
-# @app.route('/', methods=['GET', 'POST'])
-# def main_page():
-#     temp=float(request.form.get('temprature'))
-#     textLen=int(request.form.get('TextLen'))
-#     inpString=request.form['inpstr']
-#     genText=generate_text(model, start_string=inpString,num_generate=textLen, temperature=temp)
-#
-#     return render_template('index.html', genTex=genText)
-#
-#
-# if __name__=='__main__':
-#     app.run()
+@app.route('/', methods=['GET', 'POST'])
+def main_page():
+    temp=float(request.form.get('temprature'))
+    textLen=int(request.form.get('TextLen'))
+    inpString=request.form['inpstr']
+    genText=generate_text(model, start_string=inpString,num_generate=textLen, temperature=temp)
+
+    return render_template('index.html', genTex=genText)
+
+
+if __name__=='__main__':
+    app.run()
